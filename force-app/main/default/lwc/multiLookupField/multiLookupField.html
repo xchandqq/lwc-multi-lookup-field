@@ -1,0 +1,23 @@
+<template>
+    <lightning-input label={label} class="inputCmp" type="search" onchange={inputTyped} placeholder={placeholder}></lightning-input>
+    <template if:true={hasRecords}>
+        <div class="xc-dropdown-container slds-dropdown">
+            <template for:each={recordList} for:item="record">
+                <li key={record.Id}  class="xc-dropdown-option" role="option" >
+                    <lightning-icon size="small" icon-name={iconName}></lightning-icon>
+                    <span class="xc-dropdown-option-text">{record.Name}</span>
+                    <div id={record.Id} class="xc-click-me" onclick={selectRecord}></div>
+                </li>
+            </template>
+        </div>
+    </template>
+    
+    <div if:true={selectedRecords} class="xc-lookup-selection-container">
+        <template for:each={selectedRecords} for:item="record">
+            <lightning-pill key={record.Id} id={record.Id} label={record.Name} onremove={removeSelection}>
+                <lightning-icon size="small" icon-name={iconName}>
+                </lightning-icon>
+            </lightning-pill>
+        </template>
+    </div>
+</template>
